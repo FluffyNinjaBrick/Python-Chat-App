@@ -1,10 +1,14 @@
+from datetime import datetime
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_socketio import SocketIO, join_room
 from pymongo.errors import DuplicateKeyError
 
 from db import get_user, save_user, save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, \
-    get_room_members, is_room_admin, update_room, remove_room_members
+    get_room_members, is_room_admin, update_room, remove_room_members, save_message, get_messages
+
+# TODO - make it so that you can't add nonexistent users to room
 
 app = Flask(__name__)
 app.secret_key = "my secret key"
@@ -19,9 +23,7 @@ login_manager.init_app(app)
 def home():
     rooms = []
     if current_user.is_authenticated:
-        app.logger.info("Getting rooms...")
         rooms = get_rooms_for_user(current_user.username)
-        app.logger.info(rooms)
     return render_template("index.html", rooms=rooms)
 
 
@@ -94,6 +96,18 @@ def create_room():
     return render_template('create_room.html', message=message)
 
 
+@app.route('/rooms/<room_id>')
+@login_required
+def view_room(room_id):  # this is both the view of the room and the chat itself
+    room = get_room(room_id)
+    if room and is_room_member(room_id, current_user.username):
+        room_members = get_room_members(room_id)
+        messages = get_messages(room_id)
+        return render_template('view_room.html', room=room, room_members=room_members, messages=messages)
+    else:
+        return "Room not found", 404
+
+
 @app.route('/rooms/<room_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_room(room_id):
@@ -120,17 +134,6 @@ def edit_room(room_id):
         return "Room not found: no such room exists or you don't have permission to edit it", 404
 
 
-@app.route('/rooms/<room_id>')
-@login_required
-def view_room(room_id):  # this is both the view of the room and the chat itself
-    room = get_room(room_id)
-    if room and is_room_member(room_id, current_user.username):
-        room_members = get_room_members(room_id)
-        return render_template('view_room.html', room=room, room_members=room_members)
-    else:
-        return "Room not found", 404
-
-
 # =========== EVENT HANDLERS =========== #
 # this is an event handler, it handles the event emitted by the client upon connection (see view_room.html)
 @socketio.on('join-room')
@@ -150,6 +153,8 @@ def handle_join_room_event(data):
 @socketio.on('send-message')
 def handle_send_message(data):
     app.logger.info("{}'s message in room {}: {}".format(data['username'], data['room'], data['message']))
+    data['created_at'] = datetime.now().strftime("%d %b at %H:%M")
+    save_message(data['room'], data['message'], data['username'])
     socketio.emit('receive-message', data, room=data['room'])
 
 

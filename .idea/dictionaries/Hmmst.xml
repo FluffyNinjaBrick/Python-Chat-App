@@ -3,6 +3,7 @@
     <words>
       <w>chatroom</w>
       <w>endfor</w>
+      <w>onsubmit</w>
       <w>socketio</w>
       <w>usernames</w>
     </words>

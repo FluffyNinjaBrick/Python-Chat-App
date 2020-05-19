@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c659f7b-5a75-418c-bb84-fa72a4161034" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/create_room.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/edit_room.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Hmmst.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Hmmst.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/view_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_room.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,22 +105,22 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1589917184439">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1589919967703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589917184439" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1589917184439">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589919967703" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1589919967703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589917184439" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1589917184439">
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589919967703" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1589919967703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589917184439" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1589917184439">
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589919967703" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1589919967703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589917184439" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589919967703" />
     <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1589898843503">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

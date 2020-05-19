@@ -9,6 +9,7 @@ from user import User
 # USER:        _id, email, password (hashed)
 # ROOM:        _id, room_name, created_by, created_at
 # ROOM MEMBER: _id: {room_id, username}, room_name, added_by, added_at, is_admin
+# MESSAGE:     _id, room_id, text, sender, created_at
 
 
 client = MongoClient("mongodb+srv://FluffyNinjaBrick:Marcjanin123@dblab-lnoyu.mongodb.net/test?retryWrites=true&w=majority")
@@ -17,6 +18,7 @@ chat_db = client.get_database('ChatDB')
 users_collection = chat_db.get_collection("users")
 rooms_collection = chat_db.get_collection("rooms")
 room_members_collection = chat_db.get_collection("room_members")
+messages_collection = chat_db.get_collection("messages")
 
 
 # =========== USER METHODS =========== #
@@ -55,10 +57,7 @@ def update_room(room_id, room_name):
 
 
 def get_rooms_for_user(username):
-    rooms = []
-    for room in room_members_collection.find({'_id.username': username}):
-        rooms.append(room)
-    return rooms
+    return [room for room in room_members_collection.find({'_id.username': username})]
 
 
 # =========== ROOM MEMBER METHODS =========== #
@@ -87,10 +86,7 @@ def remove_room_members(room_id, usernames):
 
 
 def get_room_members(room_id):
-    members = []
-    for member in room_members_collection.find({'_id.room_id': ObjectId(room_id)}):
-        members.append(member)
-    return members
+    return [member for member in room_members_collection.find({'_id.room_id': ObjectId(room_id)})]
 
 
 def is_room_member(room_id, username):
@@ -100,3 +96,15 @@ def is_room_member(room_id, username):
 def is_room_admin(room_id, username):
     return room_members_collection\
         .count_documents({'_id': {'room_id': ObjectId(room_id), 'username': username}, 'is_admin': True})
+
+
+# =========== MESSAGE METHODS =========== #
+def save_message(room_id, text, sender):
+    messages_collection.insert_one({'room_id': room_id, 'text': text, 'sender': sender, 'created_at': datetime.now()})
+
+
+def get_messages(room_id):
+    messages = [message for message in messages_collection.find({'room_id': room_id})]
+    for message in messages:
+        message['created_at'] = message['created_at'].strftime("%d %b at %H:%M")
+    return messages
