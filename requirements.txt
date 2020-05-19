@@ -1,3 +1,6 @@
+werkzeug
+pymongo
 flask
 flask-socketio
+flask-login
 eventlet
