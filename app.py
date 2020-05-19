@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_socketio import SocketIO, join_room
 
 app = Flask(__name__)
+socketio = SocketIO(app)  # this encapsulates the flask app, this is what we actually run
 
 
 @app.route('/')
@@ -22,5 +24,26 @@ def chat():
         return redirect(url_for('home'))
 
 
+# this is an event handler, it handles the event emitted by the client upon connection (see chat.html)
+@socketio.on('join-room')
+def handle_join_room_event(data):
+    app.logger.info("user {} has joined room {}".format(data['username'], data['room']))
+    join_room(data['room'])  # socketIO has a default room system, which we will use
+    socketio.emit('join-room-announcement', data)
+
+
+@socketio.on('leave-room')
+def handle_join_room_event(data):
+    app.logger.info("user {} has left room {}".format(data['username'], data['room']))
+    # sockets leave rooms automatically upon disconnection, no further action needed
+    socketio.emit('leave-room-announcement', data)
+
+
+@socketio.on('send-message')
+def handle_send_message(data):
+    app.logger.info("{}'s message in room {}: {}".format(data['username'], data['room'], data['message']))
+    socketio.emit('receive-message', data, room=data['room'])
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)

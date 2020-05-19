@@ -2,6 +2,7 @@
   <dictionary name="Hmmst">
     <words>
       <w>chatroom</w>
+      <w>socketio</w>
     </words>
   </dictionary>
 </component>
