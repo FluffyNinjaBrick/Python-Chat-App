@@ -2,7 +2,9 @@
   <dictionary name="Hmmst">
     <words>
       <w>chatroom</w>
+      <w>endfor</w>
       <w>socketio</w>
+      <w>usernames</w>
     </words>
   </dictionary>
 </component>
