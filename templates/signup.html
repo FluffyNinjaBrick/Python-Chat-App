@@ -19,5 +19,11 @@
         <br>
         <button type="submit">Submit</button>
     </form>
+
+    {% if current_user.is_authenticated %}
+    {% else %}
+    <button onclick="location.href = '/login';" id="loginButton2" class="float-left submit-button" >I aleady have account</button>
+    {% endif %}
+    <button onclick="location.href = '/';"  class="float-left submit-button" >Home</button>
 </body>
 </html>

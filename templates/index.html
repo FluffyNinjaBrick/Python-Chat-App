@@ -12,5 +12,17 @@
         <li><a href="/rooms/{{ room._id.room_id }}">{{ room.room_name }}</a></li>
         {% endfor %}
     </ul>
+
+<!-- Buttons -->
+
+    {% if current_user.is_authenticated %}
+    <form action="/create_room">
+    <input type="submit" value="Create room" />
+    </form>
+    {% else %}
+    <button onclick="location.href = '/login';" id="loginButton" class="float-left submit-button" >Login</button>
+    <button onclick="location.href = '/signup';" id="signupButton" class="float-left submit-button" >Signup</button>
+    {% endif %}
+
 </body>
 </html>
