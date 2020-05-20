@@ -22,7 +22,9 @@
             <li>{{member._id.username}}</li>
         {% endfor %}
     </ul>
+<button onclick="location.href = getCurrentURL();"  class="float-left submit-button" >Edit</button>
 <button onclick="location.href = '/';"  class="float-left submit-button" >Home</button>
+<p id="url"></p>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script>
@@ -100,6 +102,8 @@
         newNode.innerHTML = `<b>${data.username}</b> has left the room`
         document.getElementById('messages').appendChild(newNode);
     })
-
+    function getCurrentURL() {
+    return window.location.href + '/edit'
+}
 </script>
 </html>

@@ -16,9 +16,8 @@
 <!-- Buttons -->
 
     {% if current_user.is_authenticated %}
-    <form action="/create_room">
-    <input type="submit" value="Create room" />
-    </form>
+    <button onclick="location.href = '/create-room';" id="createRoomButton" class="float-left submit-button" >Create room</button>
+    <button onclick="location.href = '/logout';" id="logoutButton" class="float-left submit-button" >Logout</button>
     {% else %}
     <button onclick="location.href = '/login';" id="loginButton" class="float-left submit-button" >Login</button>
     <button onclick="location.href = '/signup';" id="signupButton" class="float-left submit-button" >Signup</button>
