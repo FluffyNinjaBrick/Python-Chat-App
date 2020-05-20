@@ -1,4 +1,5 @@
 from datetime import datetime
+from bson.json_util import dumps
 
 from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
@@ -130,6 +131,18 @@ def edit_room(room_id):
             message = 'Room edited successfully'
             existing_members_string = ", ".join(new_members)
         return render_template('edit_room.html', room=room, members_str=existing_members_string, message=message)
+    else:
+        return "Room not found: no such room exists or you don't have permission to edit it", 404
+
+
+@app.route('/rooms/<room_id>/messages')
+@login_required
+def get_older_messages(room_id):
+    room = get_room(room_id)
+    if room and is_room_member(room_id, current_user.username):
+        page = int(request.args.get('page', 0))  # if page is unspecified it defaults to 0
+        messages = get_messages(room_id, page)
+        return dumps(messages)
     else:
         return "Room not found: no such room exists or you don't have permission to edit it", 404
 

@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Welcome to chat room: {{ room.room_name }}</h1>
+    <button type="button" id="load_older_messages_button">Load older messages</button>
     <div id="messages">
         {% for message in messages %}
             <div><b>[{{ message.created_at }}]&nbsp;{{ message.sender }}:&nbsp;</b>{{ message.text }}</div>
@@ -35,6 +36,29 @@
         })
     })
 
+    let page = 0
+
+    document.getElementById("load_older_messages_button").onclick = function(e) {
+        page += 1
+        fetch("/rooms/{{ room._id }}/messages?page=" + page, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            response.json().then(messages => {
+                messages.reverse().forEach(message => prepend_message(message.text, message.sender, message.created_at))
+            })
+        })
+    }
+
+    function prepend_message(message, username, created_at) {
+        const newNode = document.createElement('div')
+        newNode.innerHTML = `<b>[${created_at}]&nbsp;${username}:&nbsp;</b>${message}`
+        const messages_div = document.getElementById('messages')
+        messages_div.insertBefore(newNode, messages_div.firstChild)
+    }
+
     socket.on('connect', function() {
         socket.emit('join-room', {
             username: "{{ current_user.username }}",
@@ -44,7 +68,7 @@
         let message_input = document.getElementById('message_input')
 
         // set send listener
-        document.getElementById('message_input_form').onsubmit = function (e) {
+        document.getElementById('message_input_form').onsubmit = function(e) {
             e.preventDefault();
             let message = message_input.value.trim()
             if (message.length) {

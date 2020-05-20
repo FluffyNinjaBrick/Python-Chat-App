@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from bson import ObjectId
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING, ASCENDING
 from werkzeug.security import generate_password_hash
 
 from user import User
@@ -103,8 +103,16 @@ def save_message(room_id, text, sender):
     messages_collection.insert_one({'room_id': room_id, 'text': text, 'sender': sender, 'created_at': datetime.now()})
 
 
-def get_messages(room_id):
-    messages = [message for message in messages_collection.find({'room_id': room_id})]
+MESSAGE_FETCH_LIMIT = 3
+
+
+def get_messages(room_id, page=0):
+    offset = page * MESSAGE_FETCH_LIMIT
+    messages = [message for message in messages_collection
+                .find({'room_id': room_id})
+                .sort('_id', DESCENDING)
+                .limit(MESSAGE_FETCH_LIMIT)
+                .skip(offset)]
     for message in messages:
         message['created_at'] = message['created_at'].strftime("%d %b at %H:%M")
-    return messages
+    return messages[::-1]
