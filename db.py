@@ -107,6 +107,11 @@ def is_room_admin(room_id, username):
         .count_documents({'_id': {'room_id': ObjectId(room_id), 'username': username}, 'is_admin': True})
 
 
+def set_room_admin(room_id, username, new_val):
+    room_members_collection.update_one({'_id': {'room_id': ObjectId(room_id), 'username': username}},
+                                       {'$set': {'is_admin': new_val}})
+
+
 # =========== MESSAGE METHODS =========== #
 def save_message(room_id, text, sender):
     messages_collection.insert_one({'room_id': room_id, 'text': text, 'sender': sender, 'created_at': datetime.now()})

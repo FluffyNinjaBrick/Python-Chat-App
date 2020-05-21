@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+</head>
+<body>
+    <h1>Manage admins</h1>
+    <h3>{{ message }}</h3>
+    <p>Current admins: {{ admins_str }}</p>
+    <form method="post">
+        <label>Give admin privileges:</label>
+        <input type="text" name="give">
+        <br>
+        <label>Revoke admin privileges:</label>
+        <input type="text" name="revoke">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <button onclick="location.href = '/rooms/{{ room._id }}/edit'"  class="close-editor" >Back</button>
+</body>
+</html>
