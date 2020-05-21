@@ -135,6 +135,9 @@ def edit_room(room_id):
                 new_members = []
             else:
                 new_members = [username.strip() for username in request.form.get('members').split(',')]
+                for username in new_members:
+                    if not get_user(username):
+                        new_members.remove(username)
             # make sure the user doesn't delete himself, as he is an admin, and those are special
             if current_user.username not in new_members:
                 new_members.append(current_user.username)
@@ -226,6 +229,25 @@ def delete_room_endpoint(room_id):
             else:
                 message = "Incorrect password, please try again"
         return render_template('confirm_delete.html', room=room, message=message)
+    # if the room doesn't exist or the user isn't an admin, tell them about it
+    else:
+        if room:
+            error_msg = "Error: you are not an administrator of this room"
+        else:
+            error_msg = "Error: no such room exists"
+        return render_template('room_not_found.html', message=error_msg)
+
+
+@app.route('/rooms/<room_id>/leave', methods=['GET', 'POST'])
+@login_required
+def leave_room(room_id):
+    room = get_room(room_id)
+    # check if the room id is correct and if the user is an admin
+    if room and is_room_member(room_id, current_user.username):
+        if request.method == 'POST':
+            remove_room_members(room_id, [current_user.username])
+            return redirect(url_for('home'))
+        return render_template('leave_room.html', room=room, admin=is_room_admin(room_id, current_user.username))
     # if the room doesn't exist or the user isn't an admin, tell them about it
     else:
         if room:

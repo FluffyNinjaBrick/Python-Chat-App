@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+</head>
+<body>
+    {% if admin %}
+        <h2>You are the administrator of this room. Quit that role before leaving</h2>
+        <button onclick="location.href = '/rooms/{{ room._id }}';" class="abort-delete" >Back to room</button>
+    {% else %}
+        <h1>Are you sure you want to leave room {{ room.room_name }}?</h1>
+        <form method="post">
+            <button type="submit">Leave room</button>
+        </form>
+        <button onclick="location.href = '/rooms/{{ room._id }}';" class="abort-delete" >Cancel</button>
+    {% endif %}
+</body>
+</html>
