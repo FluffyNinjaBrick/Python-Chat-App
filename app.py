@@ -8,7 +8,7 @@ from flask_socketio import SocketIO, join_room
 from pymongo.errors import DuplicateKeyError
 
 from db import get_user, save_user, save_room, add_room_members, get_rooms_for_user, get_room, is_room_member, \
-    get_room_members, is_room_admin, update_room, remove_room_members, save_message, get_messages
+    get_room_members, is_room_admin, update_room, remove_room_members, save_message, get_messages, delete_room
 
 # TODO - make it so that you can't add nonexistent users to room
 
@@ -126,7 +126,12 @@ def edit_room(room_id):
             room_name = request.form.get('room_name')
             room['room_name'] = room_name
             update_room(room_id, room_name)
-            new_members = [username.strip() for username in request.form.get('members').split(',')]
+            if request.form.get('members') == "":
+                new_members = []
+            else:
+                new_members = [username.strip() for username in request.form.get('members').split(',')]
+            if current_user.username not in new_members:
+                new_members.append(current_user.username)
             members_to_add = list(set(new_members) - set(existing_room_members))
             members_to_remove = list(set(existing_room_members) - set(new_members))
             if len(members_to_add):
@@ -135,9 +140,40 @@ def edit_room(room_id):
                 remove_room_members(room_id, members_to_remove)
             message = 'Room edited successfully'
             existing_members_string = ", ".join(new_members)
+            print(new_members)
+            print(existing_members_string)
         return render_template('edit_room.html', room=room, members_str=existing_members_string, message=message)
     else:
-        return "Room not found: no such room exists or you don't have permission to edit it", 404
+        if room:
+            error_msg = "Error: you are not a member of this room"
+        else:
+            error_msg = "Error: no such room exists"
+        return render_template('room_not_found.html', message=error_msg)
+
+
+@app.route('/rooms/<room_id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_room_endpoint(room_id):
+    message = ""
+    room = get_room(room_id)
+    if room and is_room_admin(room_id, current_user.username):
+        if request.method == 'POST':
+            app.logger.info("Post request to delete retrieved!")
+            user = get_user(current_user.username)
+            app.logger.info("Username: " + user.username)
+            if user.check_password(request.form.get('password')):
+                app.logger.info("Password accepted")
+                delete_room(room_id)
+                return redirect(url_for('view_room', room_id=room_id))
+            else:
+                message = "Incorrect password, please try again"
+        return render_template('confirm_delete.html', room=room, message=message)
+    else:
+        if room:
+            error_msg = "Error: you are not an administrator of this room"
+        else:
+            error_msg = "Error: no such room exists"
+        return render_template('room_not_found.html', message=error_msg)
 
 
 @app.route('/rooms/<room_id>/messages')

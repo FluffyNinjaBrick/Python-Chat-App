@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+</head>
+<body>
+    <h1>Confirm with password to delete room {{ room.room_name }}</h1>
+    <h3>{{ message }}</h3>
+    <form method="post">
+        <label>Password for user: <b>{{ current_user.username }}</b></label>
+        <input type="password" name="password">
+        <br>
+        <button type="submit">Delete room</button>
+    </form>
+    <button onclick="location.href = '/rooms/{{ room._id }}/edit';" class="abort-delete" >Cancel</button>
+</body>
+</html>

@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c659f7b-5a75-418c-bb84-fa72a4161034" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/room_not_found.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ChatApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ChatApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/confirm_delete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/create_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create_room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/edit_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_room.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,22 +110,26 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1590060308336">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1590063115846">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590060308336" />
-    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1590060308336">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590063115846" />
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1590066012064">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590060308336" />
-    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1590060308335">
+    <state width="1515" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590066012064" />
+    <state width="1515" height="210" key="GridCell.Tab.0.center" timestamp="1590066012063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590060308335" />
-    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1590060308336">
+    <state width="1515" height="210" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590066012063" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left" timestamp="1590066012063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590060308336" />
+    <state width="1515" height="210" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590066012063" />
+    <state width="1515" height="210" key="GridCell.Tab.0.right" timestamp="1590066012063">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590066012063" />
     <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1589969751044">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -151,6 +154,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590059768716" />
+    <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590061728666">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590061728666" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589893885975">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

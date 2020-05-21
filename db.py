@@ -56,6 +56,13 @@ def update_room(room_id, room_name):
     room_members_collection.update_many({'_id.room_id': ObjectId(room_id)}, {'$set': {'room_name': room_name}})
 
 
+def delete_room(room_id):
+    members = get_room_members(ObjectId(room_id))
+    print(members)
+    remove_room_members(ObjectId(room_id), [member['_id']['username'] for member in members])
+    rooms_collection.remove(ObjectId(room_id))
+
+
 def get_rooms_for_user(username):
     return [room for room in room_members_collection.find({'_id.username': username})]
 

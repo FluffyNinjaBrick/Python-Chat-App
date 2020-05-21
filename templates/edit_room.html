@@ -16,6 +16,7 @@
         <br>
         <button type="submit">Submit</button>
     </form>
-<button onclick="location.href = '/rooms/{{ room._id }}';"  class="float-left submit-button" >Close editor</button>
+    <button onclick="location.href = '/rooms/{{ room._id }}';"  class="close-editor" >Close editor</button>
+    <button onclick="location.href = '/rooms/{{ room._id }}/delete'" class="delete-room">Delete room</button>
 </body>
 </html>

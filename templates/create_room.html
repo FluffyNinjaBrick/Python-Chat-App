@@ -7,7 +7,7 @@
 <body>
     <h1>Create room</h1>
     <h3>{{ message }}</h3>
-    <form method="post">
+    <form method="post" autocomplete="off">
         <label>Room name:</label>
         <input type="text" name="room_name">
         <br>
@@ -16,6 +16,6 @@
         <br>
         <button type="submit">Submit</button>
     </form>
-<button onclick="location.href = '/';"  class="float-left submit-button" >Home</button>
+<button onclick="location.href = '/';"  class="home" >Home</button>
 </body>
 </html>
