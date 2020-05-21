@@ -107,11 +107,12 @@ def view_room(room_id):  # this is both the view of the room and the chat itself
         messages = get_messages(room_id)
         return render_template('view_room.html', room=room, room_members=room_members, messages=messages)
     else:
+        button = "home"
         if room:
             error_msg = "Error: you are not a member of this room"
         else:
             error_msg = "Error: no such room exists"
-        return render_template('room_not_found.html', message=error_msg)
+        return render_template('room_not_found.html', message=error_msg, button=button, room_id=room_id)
 
 
 @app.route('/rooms/<room_id>/edit', methods=['GET', 'POST'])
@@ -145,10 +146,12 @@ def edit_room(room_id):
         return render_template('edit_room.html', room=room, members_str=existing_members_string, message=message)
     else:
         if room:
-            error_msg = "Error: you are not a member of this room"
+            error_msg = "Error: you are not an administrator of this room"
+            button = "room"
         else:
             error_msg = "Error: no such room exists"
-        return render_template('room_not_found.html', message=error_msg)
+            button = "home"
+        return render_template('room_not_found.html', message=error_msg, button=button, room_id=room_id)
 
 
 @app.route('/rooms/<room_id>/delete', methods=['GET', 'POST'])

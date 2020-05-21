@@ -7,6 +7,10 @@
 <body>
     <h1>Nothing here...</h1>
     <h3>{{ message }}</h3>
-<button onclick="location.href = '/';"  class="float-left submit-button" >Home</button>
+    {% if button == "home" %}
+        <button onclick="location.href = '/';"  class="float-left submit-button" >Home</button>
+    {% else %}
+        <button onclick="location.href = '/rooms/{{ room_id }}';"  class="float-left submit-button" >Back to room</button>
+    {% endif %}
 </body>
 </html>
