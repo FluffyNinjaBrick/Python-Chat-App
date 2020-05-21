@@ -107,7 +107,11 @@ def view_room(room_id):  # this is both the view of the room and the chat itself
         messages = get_messages(room_id)
         return render_template('view_room.html', room=room, room_members=room_members, messages=messages)
     else:
-        return "Room not found", 404
+        if room:
+            error_msg = "Error: you are not a member of this room"
+        else:
+            error_msg = "Error: no such room exists"
+        return render_template('room_not_found.html', message=error_msg)
 
 
 @app.route('/rooms/<room_id>/edit', methods=['GET', 'POST'])
@@ -158,7 +162,7 @@ def handle_join_room_event(data):
 
 
 @socketio.on('leave-room')
-def handle_join_room_event(data):
+def handle_leave_room_event(data):
     app.logger.info("user {} has left room {}".format(data['username'], data['room']))
     # sockets leave rooms automatically upon disconnection, no further action needed
     socketio.emit('leave-room-announcement', data)

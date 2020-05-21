@@ -12,7 +12,7 @@
             <div><b>[{{ message.created_at }}]&nbsp;{{ message.sender }}:&nbsp;</b>{{ message.text }}</div>
         {% endfor %}
     </div>
-    <form id="message_input_form">
+    <form id="message_input_form" autocomplete="off">
         <input type="text" id="message_input" placeholder="Enter your message here">
         <button type="submit">Send</button>
     </form>
@@ -31,9 +31,8 @@
     const socket = io.connect("http://127.0.0.1:5000")
 
     window.addEventListener('beforeunload', function(e) {
-        e.preventDefault()
         socket.emit('leave-room', {
-            username: "{{ username }}",
+            username: "{{ current_user.username }}",
             room: "{{ room._id }}"
         })
     })
